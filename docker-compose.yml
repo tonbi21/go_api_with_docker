@@ -1,0 +1,19 @@
+version: '3.8'
+networks:
+  test-network:
+    driver: bridge
+services:
+  db:
+    container_name: test_db
+    image: mysql:8.4.2
+    platform: linux/amd64
+    restart: always
+    networks:
+      - test-network
+    ports:
+      - 3306:3306
+    volumes:
+      - .conf/conf.d:/etc/mysql/conf.d
+    environment:
+      MYSQL_DATABASE: test_db
+      MYSQL_ROOT_PASSWORD: password
